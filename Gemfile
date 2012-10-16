@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
-gem 'sqlite3', '1.3.6'
 
 group :development, :test do
   gem 'pg', '0.14.1'
   gem 'rspec-rails', '2.11.4'
+  gem 'sqlite3', '1.3.6'
+
 end
 
 
