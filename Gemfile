@@ -31,6 +31,7 @@ group :test do
   gem 'growl_notify', '0.0.3'
   gem 'guard-spork', '1.2.1'
   gem 'spork', '0.9.2'
+  gem 'factory_girl_rails', '4.1.0'
 
 end
 
