@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   before_save { |user| user.full_name = "#{user.first_name} #{user.last_name}"}
   before_save { |user| user.email = email.downcase}  #this block passed to the before_save callback ensures 
   													 #the the email is downcase before saving to database
+  before_save :create_remember_token
 
   validates(:first_name, presence: true, length: { maximum: 50 })
   validates(:last_name, presence: true, length: { maximum: 50 })
@@ -30,6 +31,12 @@ class User < ActiveRecord::Base
   validates(:email, presence: true, format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false})
   validates(:password, length: { minimum: 6 })
   validates(:password_confirmation, presence: true)
+
+  private
+
+    def create_remember_token
+      self.remember_token = SecureRandom.urlsafe_base64
+    end
   
 end
 		
