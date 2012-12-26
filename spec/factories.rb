@@ -1,4 +1,5 @@
 FactoryGirl.define do
+  
   factory :user do
     sequence(:first_name)  { |n| "FirstName #{n}" }
     sequence(:last_name)  { |n| "LastName #{n}" }
@@ -7,10 +8,16 @@ FactoryGirl.define do
     password "foobar"
     password_confirmation "foobar"
     
- 	# With the following linewe can now use FactoryGirl.create(:admin) 
+ 	# With the following line we can now use FactoryGirl.create(:admin) 
  	#to create an administrative user in our tests.
     factory :admin do
     	admin true
     end
-  end 
+  end
+
+  factory :micropost do
+    content "Lorem ipsum"
+    user
+  end
+
 end
