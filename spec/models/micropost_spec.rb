@@ -1,5 +1,5 @@
 require 'spec_helper'
-describe Micropost do
+describe "Micropost Model Tests:" do
 	let(:user) { FactoryGirl.create(:user) }
 	
 	before { @micropost = user.microposts.build(content: "Lorem ipsum") }
@@ -13,10 +13,20 @@ describe Micropost do
 
   	it { should be_valid }
 
-  	describe "When user is not present" do
+  	describe "When user id is not present" do
   		before { @micropost.user_id = nil }
   		it { should_not be_valid }
   	end
+
+    describe "with blank content" do
+      before { @micropost.content = " " }
+      it { should_not be_valid }
+    end
+
+    describe "with content that is too long" do
+      before { @micropost.content = "a" * 145 }
+      it { should_not be_valid }
+    end
 
   	describe "accessible attributes" do
   		# This test verifies that calling Micropost.new with a nonempty 
