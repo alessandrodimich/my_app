@@ -66,12 +66,22 @@ describe "User pages" do
 
 
   describe "profile page" do
-    let (:foobar) { FactoryGirl.create(:user)}  #let is used to create a local variable, whereas the symbol  :user passed to 
+    let(:user) { FactoryGirl.create(:user)}  #let is used to create a local variable, whereas the symbol  :user passed to 
   											#factory girl has to be the same as in factories.rb.
-    before { visit user_path(foobar) }
+    let!(:micropost1) { FactoryGirl.create(:micropost, user: user, content: "Foo")}
+    let!(:micropost2) { FactoryGirl.create(:micropost, user: user, content: "Bar")}                    
+    
+    before { visit user_path(user) } # Va a visitare lo user_path
 
-    it { should have_selector('h1',    text: foobar.full_name) }
-    it { should have_selector('title', text: foobar.full_name) }
+    it { should have_selector('h1',    text: user.full_name) }
+    it { should have_selector('title', text: user.full_name) }
+
+    describe "microposts" do
+      it { should have_content(micropost1.content) }
+      it { should have_content(user.microposts.count) }
+
+    end
+
   end
 
   describe "signup" do
