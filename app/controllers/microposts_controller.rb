@@ -9,7 +9,7 @@ class MicropostsController < ApplicationController
     	if @micropost.save
       		flash[:success] = "Micropost created!"
       		redirect_to root_path
-		else
+		  else
       		render 'static_pages/home'
     	end
  	end

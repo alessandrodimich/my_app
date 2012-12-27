@@ -35,6 +35,15 @@ class User < ActiveRecord::Base
   validates(:password, length: { minimum: 6 })
   validates(:password_confirmation, presence: true)
 
+  def feed
+  # This is preliminary. See "Following users" for the full implementation.
+  
+  # self.microposts --- ALTERNATIVE 1
+  # microposts  --- ALTERNATIVE 2 (self in this case is not necessary)
+  Micropost.where("user_id = ?", id) # --- ALTERNATIVE 3 (the question mark is used in order to avoid SQL injection attacks)
+  
+  end
+
   private
 
     def create_remember_token

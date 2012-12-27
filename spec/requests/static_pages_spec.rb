@@ -11,6 +11,25 @@ describe "Static pages" do
 		it {should have_content('Base Title of The Application')}
 		it {should have_selector('title', :text => "Base Title of The Application")}
 		it {should_not have_selector('title', :text => ' | Home')}
+
+		describe "for signed-in users" do
+
+			let(:user) { FactoryGirl.create(:user) }
+
+			before do
+				FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
+				FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
+				sign_in user
+				visit root_path
+			end
+
+			it "should render the user' s feed" do
+				user.feed.each do |item|
+					page.should have_selector("li##{item.id}", text: item.content)
+				end
+			end	
+
+		end
 	
 	end
 
@@ -61,14 +80,4 @@ end
 
 
 
-#Originale
-#require 'spec_helper'
-# describe "StaticPages" do
-#   describe "GET /static_pages" do
-#     it "works! (now write some real specs)" do
-#       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-#       get static_pages_index_path
-#       response.status.should be(200)
-#     end
-#   end
-# end
+
