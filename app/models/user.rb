@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   has_secure_password  
 
   has_many :microposts, dependent: :destroy
-
+  has_many :followed_users, through: :relationships, source: :followed 
 
 
 
