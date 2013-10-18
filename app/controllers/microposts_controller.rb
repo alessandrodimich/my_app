@@ -1,14 +1,14 @@
 class MicropostsController < ApplicationController
-  
+
  	before_filter :signed_in_user, only: [ :create, :destroy ]
   before_filter :correct_user, only: :destroy
-  
+
 	def create
-    	
+
     	@micropost = current_user.microposts.build(params[:micropost])
-    	
+
     	if @micropost.save
-      		flash[:success] = "Micropost created!"
+      		flash[:success] = "Preventivo pubblicato!"
       		redirect_to root_path
 		  else
       		render 'static_pages/home'
@@ -18,7 +18,7 @@ class MicropostsController < ApplicationController
 	def destroy
     @micropost.destroy
     redirect_to root_path
-  end 
+  end
 
   private
 
@@ -29,7 +29,7 @@ class MicropostsController < ApplicationController
     # EQUIVALENT TO:
     # @micropost = Micropost.find_by_id(params[:id])
     # redirect_to root_path unless current_user?(@micropost.user)
-  
+
   end
 
 end

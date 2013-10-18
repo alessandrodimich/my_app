@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def index
     @users = User.paginate(page: params[:page])
   end
-	
+
 
   def show
 		@user = User.find(params[:id])
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     	@user = User.new(params[:user])
     	if @user.save
       		sign_in @user
-      		flash[:success] = "Welcome to the Sample App!"
+      		flash[:success] = "Benvenuto in NewCo!"
       		redirect_to @user
     	else
       		render 'new'
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   def edit
   end
 
-  def update 
+  def update
     if @user.update_attributes(params[:user])
       flash[:success] = "Your profile has been successfully updated"
       sign_in @user
